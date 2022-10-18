@@ -179,9 +179,13 @@ const optimizeImage: IOptimizeImage = async (src, options) => {
       ? pipelineBeforeAlpha
       : pipelineBeforeAlpha.removeAlpha();
 
+  // https://github.com/joe-bell/plaiceholder/issues/173
   const getOptimizedForBase64 = pipeline
     .clone()
     .normalise()
+    .modulate({ saturation: 1.2, brightness: 1 })
+    .removeAlpha()
+    .rotate()
     .toBuffer({ resolveWithObject: true });
 
   const getOptimizedForBlurhash =
