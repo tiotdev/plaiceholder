@@ -23,11 +23,13 @@ interface IGetImageSize {
 }
 
 const getImageSize: IGetImageSize = (file) => {
-  const { width, height, type } = sizeOf(file);
+  // https://github.com/image-size/image-size#jpeg-image-orientation
+  const { width, height, type, orientation } = sizeOf(file);
 
   return {
     width,
     height,
+    orientation,
     type,
   };
 };
